@@ -1,0 +1,509 @@
+Full name: Xcode
+Short name: xcode
+Author: -
+
+; Dark mode
+
+Background: dark
+
+Color: base0        #292a30 ~
+Color: base1        #2f3037 ~
+Color: base2        #393b44 ~
+Color: base3        #414453 ~
+Color: base4        #53606e ~
+Color: base5        #7f8c98 ~
+Color: base6        #a3b1bf ~
+Color: base7        #dfdfe0 ~
+
+Color: deep_blue0   #0f5bca ~
+Color: deep_blue1   #4484d1 ~
+Color: deep_yellow  #fef937 ~
+
+Color: green_wash   #243330 ~
+Color: orange_wash  #382e27 ~
+Color: red_wash     #3b2d2b ~
+
+Color: blue         #4eb0cc ~
+Color: light_blue   #6bdfff ~
+Color: orange       #ffa14f ~
+Color: pink         #ff7ab2 ~
+Color: red          #ff8170 ~
+Color: yellow       #d9c97c ~
+
+Color: purple       #b281eb ~
+Color: light_purple #dabaff ~
+
+Color: teal         #78c2b3 ~
+Color: light_teal   #acf2e4 ~
+
+Color: green        #84b360 ~
+Color: light_green  #b0e687 ~
+
+; Terminal Colour Palette
+Term colors: base3      red  teal         yellow
+Term colors: blue       pink purple       base7
+Term colors: base5      red  light_teal   orange
+Term colors: light_blue pink light_purple base7
+
+; Highlighting
+Normal         base7        base0
+Cursor         base0        base7
+Empty          base7        none
+
+; Vim Interface
+CursorLineNr   base7        base1
+EndOfBuffer    base0        base0
+FoldColumn     base4        none
+Folded         base4        base2
+LineNr         base4        none
+MatchWord      base7        deep_blue0
+MatchParen     base0       deep_yellow
+SignColumn     base4        none
+Signify        deep_blue1   none
+
+Ignore         base4        none
+
+Pmenu          base7        base2
+PmenuSbar      base2        base2
+PmenuSel       base7        deep_blue0
+PmenuThumb     base3        base3
+
+ErrorMsg       red          none
+ModeMsg        base5        none
+MoreMsg        pink         none
+Question       pink         none
+WarningMsg     orange       none
+
+ColorColumn    none         base1
+CursorColumn   none         base1
+CursorLine     none         base1
+
+QuickFixLine   base7        deep_blue0
+StatusLine     base7        base3 bold
+StatusLineNC   base7        base3
+VertSplit      base3        base0
+WildMenu       base7        deep_blue0
+
+IncSearch      base0        deep_yellow
+Search         base7        base3
+Visual         none         base3
+
+DiffAdd        light_teal   green_wash
+DiffChange     orange       none
+DiffDelete     red          red_wash
+DiffText       orange       orange_wash
+
+; Syntax
+Comment        base5        none
+Error          red        none underline
+PreProc        orange       none
+Special        teal         none
+Statement      pink         none bold
+
+Character      yellow       none
+Directory      light_blue   none
+Number         yellow       none
+SpecialComment base6        none
+String         red          none
+Title          base7        none bold
+Todo           base6        none bold
+Underlined     light_blue   none underline
+
+SpellBad       none         none undercurl
+SpellCap       none         none undercurl
+SpellLocal     none         none undercurl
+SpellRare      none         none undercurl
+
+markdownDelimiter teal         none
+markdownCode      light_purple none
+
+texCmd light_blue none
+texCmdEnv light_blue none bold
+
+Typedef     blue         none
+LocalType   teal         none
+LibraryType purple       none
+FunctionDef blue         none
+LocalFunc   teal         none
+LibraryFunc purple       none
+IdentifierDef blue         none
+LocalIdent    teal         none
+LibraryIdent  purple       none
+
+
+Delimiter base7 none
+Operator  base7 none
+
+
+
+; Light theme
+Background: light
+
+Color: base0       #ffffff ~
+Color: base1       #f4f4f4 ~
+Color: base2       #e5e5e5 ~
+Color: base3       #cdcdcd ~
+Color: base4       #8a99a6 ~
+Color: base5       #5c6873 ~
+Color: base6       #262626 ~
+
+Color: aqua        #b4d8fd ~
+Color: light_aqua  #ecf5ff ~
+
+Color: deep_blue0  #156adf ~
+Color: deep_blue1  #69a7fc ~
+Color: deep_yellow #fef869 ~
+
+Color: green_wash  #edfff0 ~
+Color: red_wash    #fef0f1 ~
+Color: yellow_wash #fdfae6 ~
+
+Color: blue        #0f68a0 ~
+Color: brown       #78492a ~
+Color: dark_blue   #0b4f79 ~
+Color: green       #2d8504 ~
+Color: pink        #ad3da4 ~
+Color: red         #d12f1b ~
+Color: strong_blue #272ad8 ~
+
+Color: dark_purple #4b21b0 ~
+Color: purple      #804fb8 ~
+
+Color: dark_teal   #23575c ~
+Color: teal        #3e8087 ~
+
+; Terminal Colour Palette
+Term colors: aqua      red  teal        brown
+Term colors: blue      pink purple      base6
+Term colors: base4     red  dark_teal   brown
+Term colors: dark_blue pink dark_purple base6
+
+; Highlighting
+Normal         base6       base0
+Cursor         base0       base6
+Empty          base6       none
+
+; Vim Interface
+CursorLineNr   base6       light_aqua
+EndOfBuffer    base0       base0
+FoldColumn     base3       none
+Folded         base4       base2
+LineNr         base3       none
+MatchParen     base6       deep_yellow
+MatchWord      base0       deep_blue0
+SignColumn     base3       none
+Signify        deep_blue1  none
+
+Ignore         base3       none
+
+Pmenu          base6       base1
+PmenuSbar      base1       base1
+PmenuSel       base0       deep_blue0
+PmenuThumb     base2       base2
+
+ErrorMsg       red         none
+ModeMsg        base4       none
+MoreMsg        pink        none
+Question       pink        none
+WarningMsg     brown       none
+
+ColorColumn    none        base1
+CursorColumn   none        light_aqua
+CursorLine     none        light_aqua
+
+QuickFixLine   base0       deep_blue0
+StatusLine     base6       base2 bold
+StatusLineNC   base6       base2
+VertSplit      base2       base0
+WildMenu       base0       deep_blue0
+
+IncSearch      base6       deep_yellow
+Search         base6       base2
+Visual         none        aqua
+
+DiffAdd        none        green_wash
+DiffChange     none        none
+DiffDelete     none        red_wash
+DiffText       none        yellow_wash
+
+; Syntax
+
+Comment        base4       none
+Error          red       none underline
+PreProc        brown       none
+Special        dark_teal   none
+Statement      pink        none bold
+
+Character      strong_blue none
+Directory      blue        none
+Number         strong_blue none
+SpecialComment base5       none
+String         red         none
+Title          base6       none bold
+Todo           base5       none bold
+Underlined     blue        none underline
+
+SpellBad       none        none undercurl
+SpellCap       none        none undercurl
+SpellLocal     none        none undercurl
+SpellRare      none        none undercurl
+
+markdownDelimiter teal      none
+markdownCode      purple    none
+
+texCmd blue none
+texCmdEnv blue none bold
+
+Typedef     blue        none
+LocalType   teal        none
+LibraryType purple      none
+FunctionDef blue        none
+LocalFunc   teal        none
+LibraryFunc purple      none
+IdentifierDef blue        none
+LocalIdent    teal        none
+LibraryIdent  purple      none
+Delimiter base6 none
+Operator  base6 none
+
+
+; Highlight group links
+Background: any
+
+; Vim Interface
+Terminal         -> Normal
+
+TabLine          -> StatusLineNC
+TabLineFill      -> StatusLineNC
+TabLineSel       -> StatusLine
+
+StatusLineTerm   -> StatusLine
+StatusLineTermNC -> StatusLineNC
+
+VisualNOS        -> Visual
+
+; Emphasise the text in the message area/command-line 
+MsgArea          -> Title
+
+; Diff
+diffAdded          -> DiffAdd
+diffBDiffer        -> WarningMsg
+diffChanged        -> DiffChange
+diffCommon         -> WarningMsg
+diffDiffer         -> WarningMsg
+diffFile           -> Directory
+diffIdentical      -> WarningMsg
+diffIndexLine      -> Number
+diffIsA            -> WarningMsg
+diffNoEOL          -> WarningMsg
+diffOnly           -> WarningMsg
+diffRemoved        -> DiffDelete
+
+; Syntax
+
+; Assume constants (which are always highlighted the same as identifiers) are
+; from libraries.
+Constant           -> LibraryIdent
+Float              -> Number
+StringDelimiter    -> String
+
+Identifier         -> LocalIdent # Assume identifiers are local to the project.
+Function           -> LibraryFunc # Assume functions are from libraries.
+
+Boolean            -> Statement
+Conditional        -> Statement
+Exception          -> Statement
+Include            -> Statement
+Keyword            -> Statement
+Label              -> Statement
+Repeat             -> Statement
+StorageClass       -> Statement
+Structure          -> Statement
+
+Define             -> PreProc
+Macro              -> PreProc
+PreCondit          -> PreProc
+
+Type               -> LibraryType # Assume that types are from libraries.
+
+Debug              -> Special
+SpecialChar        -> Special
+Tag                -> Special
+
+Noise              -> Delimiter
+Quote              -> StringDelimiter
+
+Conceal            -> Ignore
+NonText            -> Ignore
+SpecialKey         -> Ignore
+Whitespace         -> Ignore
+
+ALEVirtualTextError -> ErrorMsg
+ALEVirtualTextWarning -> WarningMsg
+Searchlight        -> IncSearch
+SignifySignAdd     -> Signify
+SignifySignChange  -> Signify
+SignifySignDelete  -> Signify
+bibEntryKw         -> LibraryIdent
+bibKey             -> IdentifierDef
+bibType            -> LibraryType
+cssAtRule          -> Keyword
+cssAttr            -> Keyword
+cssBraces          -> cssNoise
+cssClassName       -> LocalIdent
+cssColor           -> cssAttr
+cssFunction        -> Empty
+cssIdentifier      -> LocalIdent
+cssProp            -> LibraryType
+cssPseudoClassId   -> LibraryIdent
+cssSelectorOp      -> Operator
+gitcommitHeader    -> Todo
+gitcommitOverflow  -> Error
+gitcommitSummary   -> Title
+goField            -> LocalIdent
+goFunction         -> FunctionDef
+goFunctionCall     -> LibraryFunc
+goVarAssign        -> LocalIdent
+goVarDefs          -> IdentifierDef
+helpCommand        -> helpExample
+helpExample        -> markdownCode
+helpHeadline       -> Title
+helpHyperTextEntry -> Comment
+helpHyperTextJump  -> Underlined
+helpSectionDelim   -> Ignore
+helpURL            -> helpHyperTextJump
+helpVim            -> Title
+htmlArg            -> Special
+htmlEndTag         -> Delimiter
+htmlLink           -> Underlined
+htmlSpecialTagName -> htmlTagName
+htmlTag            -> Delimiter
+htmlTagName        -> Statement
+jinjaBlockName     -> Typedef
+jinjaFilter        -> LibraryFunc
+jinjaNumber        -> Number
+jinjaOperator      -> Operator
+jinjaRawDelim      -> PreProc
+jinjaSpecial       -> Keyword
+jinjaString        -> String
+jinjaTagDelim      -> Delimiter
+jinjaVarDelim      -> Delimiter
+jsBuiltins         -> LibraryFunc
+jsClassDefinition  -> Typedef
+jsDomErrNo         -> LibraryIdent
+jsDomNodeConsts    -> LibraryIdent
+jsExceptions       -> LibraryType
+jsFuncArgCommas    -> jsNoise
+jsFuncName         -> FunctionDef
+jsFunction         -> jsStatement
+jsGlobalNodeObjects -> jsGlobalObjects
+jsGlobalObjects    -> LibraryType
+jsObjectProp       -> LocalIdent
+jsOperatorKeyword  -> jsStatement
+jsThis             -> jsStatement
+jsVariableDef      -> IdentifierDef
+jsonKeyword        -> jsonString
+jsonKeywordMatch   -> Operator
+jsonQuote          -> StringDelimiter
+rsForeignConst     -> LibraryIdent
+rsForeignFunc      -> LibraryFunc
+rsForeignType      -> LibraryType
+rsFuncDef          -> FunctionDef
+rsIdentDef         -> IdentifierDef
+rsLibraryConst     -> LibraryIdent
+rsLibraryFunc      -> LibraryFunc
+rsLibraryType      -> LibraryType
+rsLifetimeDef      -> IdentifierDef
+rsSpecialLifetime  -> LibraryIdent
+rsUserConst        -> LocalIdent
+rsUserFunc         -> LocalFunc
+rsUserLifetime     -> LocalIdent
+rsUserMethod       -> LibraryFunc
+rsUserType         -> LocalType
+scssAttribute      -> cssNoise
+scssInclude        -> Keyword
+scssMixin          -> Keyword
+scssMixinName      -> LocalFunc
+scssMixinParams    -> cssNoise
+scssSelectorName   -> cssClassName
+scssVariableAssignment -> Operator
+scssVariableValue  -> Operator
+swiftFuncDef       -> FunctionDef
+swiftIdentDef      -> IdentifierDef
+swiftLibraryFunc   -> LibraryFunc
+swiftLibraryProp   -> LibraryIdent
+swiftLibraryType   -> LibraryType
+swiftUserFunc      -> LocalFunc
+swiftUserProp      -> LocalIdent
+swiftUserType      -> LocalType
+typescriptArrayMethod -> LibraryFunc
+typescriptArrowFunc -> Operator
+typescriptAssign   -> Operator
+typescriptBOM      -> LibraryType
+typescriptBOMWindowCons -> LibraryType
+typescriptBOMWindowMethod -> LibraryFunc
+typescriptBOMWindowProp -> LibraryType
+typescriptBinaryOp -> Operator
+typescriptBraces   -> Delimiter
+typescriptCall     -> Empty
+typescriptClassHeritage -> Type
+typescriptClassName -> TypeDef
+typescriptDOMDocMethod -> LibraryFunc
+typescriptDOMDocProp -> LibraryIdent
+typescriptDOMEventCons -> LibraryType
+typescriptDOMEventMethod -> LibraryFunc
+typescriptDOMEventMethod -> LibraryFunc
+typescriptDOMEventProp -> LibraryIdent
+typescriptDOMEventTargetMethod -> LibraryFunc
+typescriptDOMNodeMethod -> LibraryFunc
+typescriptDOMStorageMethod -> LibraryIdent
+typescriptEndColons -> Delimiter
+typescriptExport   -> Keyword
+typescriptFuncName -> FunctionDef
+typescriptFuncTypeArrow -> typescriptArrowFunc
+typescriptGlobal   -> typescriptPredefinedType
+typescriptIdentifier -> Keyword
+typescriptInterfaceName -> Typedef
+typescriptMember   -> LocalFunc
+typescriptObjectLabel -> LocalIdent
+typescriptOperator -> Keyword
+typescriptParens   -> Delimiter
+typescriptPredefinedType -> LibraryType
+typescriptTypeAnnotation -> Delimiter
+typescriptTypeReference -> typescriptUserDefinedType
+typescriptUserDefinedType -> LocalType
+typescriptVariable -> Keyword
+typescriptVariableDeclaration -> IdentifierDef
+vimAutoCmdSfxList  -> LibraryType
+vimAutoEventList   -> LocalIdent
+vimCmdSep          -> Special
+vimCommentTitle    -> SpecialComment
+vimContinue        -> Delimiter
+vimFuncName        -> LibraryFunc
+vimFunction        -> FunctionDef
+vimHighlight       -> Statement
+vimMapModKey       -> vimNotation
+vimNotation        -> LibraryType
+vimOption          -> LibraryIdent
+vimUserFunc        -> LocalFunc
+markdownBoldDelimiter       -> markdownDelimiter
+markdownBoldItalicDelimiter -> markdownDelimiter
+markdownCodeBlock           -> markdownCode
+markdownCodeDelimiter       -> markdownDelimiter
+markdownHeadingDelimiter    -> markdownDelimiter
+markdownItalicDelimiter     -> markdownDelimiter
+markdownLinkDelimiter       -> markdownDelimiter
+markdownLinkText            -> Empty
+markdownLinkTextDelimiter   -> markdownDelimiter
+markdownListMarker          -> markdownDelimiter
+markdownRule                -> markdownDelimiter
+markdownUrl                 -> Underlined
+
+texDelim -> texCmd
+texMathDelimZone -> texCmdEnv
+texMathZone -> Normal
+texEnvArgName -> String
+texMathEnvArgName -> texEnvArgName
+texRefArg -> texEnvArgName
+texMathOper -> texMathZone
+

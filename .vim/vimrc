@@ -1,0 +1,214 @@
+vim9script
+
+unlet! g:skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+
+#---------#
+# Spacing #
+#---------#
+
+set autoindent     # Copy indentation of current line when starting new line
+set breakindent    # Wrapped lines follow visual indentation of previous lines
+set tabstop=4      # 1 tab = 4 spaces
+set expandtab      # Insert spaces instead when <Tab> is pressed.
+set shiftwidth=0   # One level of indentation is &tabstop spaces
+set softtabstop=-1 # A tab counts as &shiftwidth spaces for editing operations
+
+
+#----------------------#
+# Scrolling & Wrapping #
+#----------------------#
+
+syntax enable    # Enable syntax highlighting
+set wrap         # Lines wider than screen soft wrap around to next line
+set linebreak    # Do not soft wrap in the middle of a word
+set smoothscroll # Display partial lines at the top of the of viewport
+set scrolloff=0  # Cursor can be at very top or bottom of viewport
+
+# Smoother mouse scrolling terminal
+if !has("gui_running")
+    noremap <ScrollWheelUp> <C-y>
+    noremap <ScrollWheelDown> <C-e>
+endif
+
+tnoremap <ScrollWheelUp> <C-\><C-n><ScrollWheelUp>
+tnoremap <ScrollWheelDown> <C-\><C-n><ScrollWheelDown>
+
+
+#-----------#
+# Interface #
+#-----------#
+
+set cursorline       # Highlight the line containing the cursor
+set number           # Display (absolute) line numbers.
+set showcmd          # Display incomplete normal mode commands in command bar
+set wildmenu         # Display completion matches in status line
+set wildoptions=pum
+set shortmess+=F     # Do not display file info when opening file
+set shortmess-=S     # Show search results as e.g. [2/7] in the command line
+set display=truncate # Show @@@ in the last line if it is truncated
+set signcolumn=number
+set listchars=eol:¬,tab:——>,space:·,trail:·,extends:>,precedes:<
+set fillchars=vert:│ # FIXME: Set other fillchars
+
+colorscheme xcode
+autocmd OSAppearanceChanged * {
+    &background = v:os_appearance == 1 ? "dark" : "light"
+    redraw
+}
+
+def g:TitleModified(): string
+    return &modified ?  "— Edited" : ""
+enddef
+set titlestring=%t\ %{g:TitleModified()}
+set laststatus=1
+set ruler
+
+if has("gui_running")
+    set rulerformat=%14(%=%m\ %5l,\ %3c%)
+    set statusline=%f\ %m\ %=%5l,\ %3c\ %y
+    set guifont=SF\ Mono:h11
+    set linespace=2 # Vertical spacing between lines
+else
+    set rulerformat=%21(%=%m\ %5l,\ %3c\ \ \ \ %P%)
+    set statusline=%f\ %m\ %=%5l,\ %3c\ \ \ \ %P\ %y
+endif
+
+# Set cursor shape in different modes using xterm escape sequences
+# https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+if &term =~ "xterm.*"
+    set t_SI=[5\ q # Vertical bar in insert mode.
+    set t_SR=[3\ q # Horizontal bar in replace mode.
+    set t_EI=[1\ q # Block in normal mode.
+
+    # Workaround: Invoking `printf '[1 q'`on VimEnter prints escape
+    # sequences verbatim to the command line, so we quickly enter and leave
+    # insert mode instead. Because this is done in succession, we never
+    # actually start editing the file, so this works even if a file is
+    # read-only.
+    autocmd VimEnter * startinsert | stopinsert
+    autocmd VimResume * execute "silent !printf '[1 q'"
+    autocmd VimLeave * execute "silent !printf '[5 q'"
+    autocmd VimSuspend * execute "silent !printf '[5 q'"
+endif
+
+
+#------------#
+# Behaviours #
+#------------#
+
+set hlsearch         # Highlight all matches of search pattern
+set incsearch        # Highlight search matches while typing pattern
+set splitbelow       # Prefer to create new splits below
+set splitright       # and to the right
+set ttimeout         # If a typed key sequence matches a key mapping partially, 
+set ttimeoutlen=100  # wait 100ms before discarding match
+set hidden           # Buffers are hidden (rather than unloaded) when abandoned
+set directory=~/.vim/swap
+set undofile
+set undodir=~/.vim/undo
+set history=1000     # Remember the last 1000 commands
+set spelllang=en_gb  # Spell check follows British English
+set mouse=a
+set whichwrap+=<,>,[,]
+
+
+#----------#
+# Filetype #
+#----------#
+
+filetype plugin indent on
+set cinoptions=:0
+
+
+#------------------------#
+# Commands & Keybindings #
+#------------------------#
+
+nnoremap Y yg_
+nnoremap j gj
+nnoremap k gk
+
+def Args()
+    var args = map(argv(), (key, val) => key + 1 .. ". " .. val)
+    insert(args, "Select a file:")
+    var arg = inputlist(args)
+    if 1 <= arg && arg <= argc()
+        execute "argument " .. arg
+    endif
+enddef
+command! Args call Args()
+
+def SynGroup()
+    var sid = synID(line("."), col("."), true)
+    var tid = synIDtrans(sid)
+    if sid == tid
+        echo synIDattr(sid, "name")
+    else
+        echo synIDattr(sid, "name") .. " -> " .. synIDattr(tid, "name")
+    endif
+enddef
+command! SynGroup call SynGroup()
+
+
+#---------#
+# Plugins #
+#---------#
+
+# Netrw
+nnoremap - :Explore<CR>
+g:netrw_banner = 0
+
+packadd traces
+packadd commentary
+
+packadd rsi
+inoremap <C-k> <C-o>D
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? "" : getcmdline()[:getcmdpos()-2]<CR>
+# FIXME: rsi <C-f> gives error in LSP rename command line
+# FIXME: Same for my <C-k>
+
+packadd ultisnips
+g:UltiSnipsSnippetDirectories = ["snips"]
+
+packadd undotree
+g:undotree_WindowLayout    = 2
+g:undotree_TreeNodeShape   = "·"
+g:undotree_TreeReturnShape = "╲"
+g:undotree_TreeVertShape   = "│"
+g:undotree_TreeSplitShape  = "╱"
+g:undotree_ShortIndicators = 1
+nnoremap <Leader>ut :UndotreeToggle<CR>
+
+packadd vimtex
+g:vimtex_view_method = 'skim'
+g:vimtex_imaps_enabled = 0
+g:vimtex_syntax_conceal_disable = 1
+
+packadd sandwich
+runtime macros/sandwich/keymap/surround.vim
+
+packadd lsp
+g:LspAddServer([
+    { 
+        name: "clangd",
+        filetype: ["c", "cpp", "objc"],
+        path: "/usr/bin/clangd"
+    },
+    { 
+        name: "texlab",
+        filetype: ["plaintex", "tex"],
+        path: "/opt/homebrew/bin/texlab" 
+    },
+    # vimls does not yet support Vim9
+    # {
+    #     name: "vimls",
+    #     filetype: "vim",
+    #     path: "/opt/homebrew/bin/vim-language-server",
+    #     args: ["--stdio"],
+    #     initializationOptions: {
+    #         vimruntime: $VIMRUNTIME
+    #     }
+    # }
+])
