@@ -160,10 +160,10 @@ command! SynGroup call SynGroup()
 nnoremap - :Explore<CR>
 g:netrw_banner = 0
 
-packadd traces
-packadd commentary
+packadd traces.vim
+packadd vim-commentary
 
-packadd rsi
+packadd vim-rsi
 inoremap <C-k> <C-o>D
 cnoremap <C-k> <C-\>e getcmdpos() == 1 ? "" : getcmdline()[:getcmdpos()-2]<CR>
 # FIXME: rsi <C-f> gives error in LSP rename command line
@@ -173,7 +173,7 @@ packadd ultisnips
 g:UltiSnipsSnippetDirectories = ["snips"]
 
 packadd undotree
-g:undotree_WindowLayout    = 2
+g:undotree_WindowLayout   = 2
 g:undotree_TreeNodeShape   = "·"
 g:undotree_TreeReturnShape = "╲"
 g:undotree_TreeVertShape   = "│"
@@ -186,10 +186,17 @@ g:vimtex_view_method = 'skim'
 g:vimtex_imaps_enabled = 0
 g:vimtex_syntax_conceal_disable = 1
 
-packadd sandwich
+packadd vim-sandwich
 runtime macros/sandwich/keymap/surround.vim
 
 packadd lsp
+
+g:LspOptionsSet({
+    diagSignErrorText: "E",
+    diagSignHintText: "H",
+    diagSignInfoText: "I",
+    diagSignWarningText: "W"
+})
 g:LspAddServer([
     { 
         name: "clangd",
