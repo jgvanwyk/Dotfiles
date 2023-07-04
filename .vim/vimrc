@@ -127,8 +127,6 @@ set cinoptions=:0
 #------------------------#
 
 nnoremap Y yg_
-nnoremap j gj
-nnoremap k gk
 
 def Args()
     var args = map(argv(), (key, val) => key + 1 .. ". " .. val)
@@ -185,6 +183,8 @@ packadd vimtex
 g:vimtex_view_method = 'skim'
 g:vimtex_imaps_enabled = 0
 g:vimtex_syntax_conceal_disable = 1
+g:vimtex_imaps_list = {}
+# g:vimtex_compiler_latexmk[aux_dir] = latexmk_aux
 
 packadd vim-sandwich
 runtime macros/sandwich/keymap/surround.vim
