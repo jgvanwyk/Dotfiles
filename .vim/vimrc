@@ -40,17 +40,20 @@ tnoremap <ScrollWheelDown> <C-\><C-n><ScrollWheelDown>
 # Interface #
 #-----------#
 
-set cursorline       # Highlight the line containing the cursor
 set number           # Display (absolute) line numbers.
 set showcmd          # Display incomplete normal mode commands in command bar
 set wildmenu         # Display completion matches in status line
 set wildoptions=pum
+set shortmess+=I
 set shortmess+=F     # Do not display file info when opening file
 set shortmess-=S     # Show search results as e.g. [2/7] in the command line
 set display=truncate # Show @@@ in the last line if it is truncated
 set signcolumn=number
 set listchars=eol:¬,tab:——>,space:·,trail:·,extends:>,precedes:<
 set fillchars=vert:│ # FIXME: Set other fillchars
+
+autocmd BufEnter * setlocal cursorline
+autocmd BufLeave * setlocal nocursorline
 
 colorscheme xcode
 autocmd OSAppearanceChanged * {
@@ -149,10 +152,24 @@ def SynGroup()
 enddef
 command! SynGroup call SynGroup()
 
+command! -nargs=1 -complete=arglist Argument argedit <args> | argdedupe
+command! -nargs=1 -complete=file Argedit argedit <args> | argdedupe
+
 
 #---------#
 # Plugins #
 #---------#
+
+# Disable unused builtin plugins
+g:loaded_2html_plugin = 1
+g:loaded_getscriptPlugin = 1
+g:loaded_gzip = 1
+g:loaded_logipat = 1
+g:loaded_rrhelper = 1
+g:loaded_spellfile_plugin = 1
+g:loaded_tarPlugin = 1
+g:loaded_vimballPlugin = 1
+g:loaded_zipPlugin = 1
 
 # Netrw
 nnoremap - :Explore<CR>
@@ -180,11 +197,24 @@ g:undotree_ShortIndicators = 1
 nnoremap <Leader>ut :UndotreeToggle<CR>
 
 packadd vimtex
-g:vimtex_view_method = 'skim'
+
+g:vimtex_view_method = "skim"
 g:vimtex_imaps_enabled = 0
 g:vimtex_syntax_conceal_disable = 1
-g:vimtex_imaps_list = {}
-# g:vimtex_compiler_latexmk[aux_dir] = latexmk_aux
+g:vimtex_compiler_latexmk = {
+    aux_dir: "latexmk_aux",
+    out_dir: "",
+    callback: 1,
+    continuous: 1,
+    executable: "latexmk",
+    hooks: [],
+    options: [
+        "-verbose",
+        "-file-line-error",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+    ]
+}
 
 packadd vim-sandwich
 runtime macros/sandwich/keymap/surround.vim
