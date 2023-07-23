@@ -10,7 +10,9 @@ packages=(
     mbbill/undotree
     tpope/vim-commentary
     tpope/vim-rsi
+    tpope/vim-eunuch
     yegappan/lsp
+    vim-scripts/sudo.vim
 )
 
 if [[ ! -a $packpath ]]; then
@@ -25,14 +27,18 @@ for pack in $packages; do
         print -P "%F{magenta}installing $pack[1]/$pack[2]%f"
         mkdir -p "$pack[1]/opt"
         git clone "https://github.com/$pack[1]/$pack[2]" "$pack[1]/opt/$pack[2]"
-        cd "$pack[1]/opt/$pack[2]/doc"
-        vim -u NONE -c "helptags . | q"
+        if [[ -d  "$pack[1]/opt/$pack[2]/doc" ]]; then
+            cd "$pack[1]/opt/$pack[2]/doc"
+            vim -u NONE -c "helptags . | q"
+        fi
     else
         print -P "%F{magenta}updating $pack[1]/$pack[2]%f"
         cd "$pack[1]/opt/$pack[2]"
         git pull
-        cd doc
-        vim -u NONE -c "helptags . | q"
+        if [[ -d "doc" ]]; then
+            cd doc
+            vim -u NONE -c "helptags . | q"
+        fi
     fi
     cd "$packpath"
 done

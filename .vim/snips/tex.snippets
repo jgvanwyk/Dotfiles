@@ -122,6 +122,12 @@ snippet `q "alpha" iA
 \theta
 endsnippet
 
+snippet beg
+\begin{$1}
+	$2
+\end{$1}$0
+endsnippet
+
 snippet eq
 \begin{equation*}
 	$1
@@ -147,39 +153,51 @@ snippet aln
 endsnippet
 
 snippet thm
-\begin{thm}
+\begin{theorem}
 	$1
-\end{thm}$0
+\end{theorem}$0
+endsnippet
+
+snippet ex
+\begin{example}
+	$1
+\end{example}$0
 endsnippet
 
 snippet prop
-\begin{prop}
+\begin{proposition}
 	$1
-\end{prop}$0
+\end{proposition}$0
 endsnippet
 
 snippet cor
-\begin{cor}
+\begin{corollary}
 	$1
-\end{cor}$0
+\end{corollary}$0
 endsnippet
 
 snippet defn
-\begin{defn}
+\begin{definition}
 	$1
-\end{defn}$0
+\end{definition}$0
 endsnippet
 
 snippet prf
-\begin{prf}
+\begin{proof}
 	$1
-\end{prf}$0
+\end{proof}$0
 endsnippet
 
 snippet asd
-\begin{asd}
+\begin{aside}
 	$1
-\end{asd}$0
+\end{aside}$0
+endsnippet
+
+snippet enum
+\begin{enumerate}
+	$1
+\end{enumerate}$0
 endsnippet
 
 snippet (

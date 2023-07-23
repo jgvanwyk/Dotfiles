@@ -1,7 +1,7 @@
 vim9script
 
 unlet! g:skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+runtime defaults.vim
 
 
 #---------#
@@ -23,7 +23,7 @@ set softtabstop=-1 # A tab counts as &shiftwidth spaces for editing operations
 syntax enable    # Enable syntax highlighting
 set wrap         # Lines wider than screen soft wrap around to next line
 set linebreak    # Do not soft wrap in the middle of a word
-set smoothscroll # Display partial lines at the top of the of viewport
+# set smoothscroll # Display partial lines at the top of the of viewport
 set scrolloff=0  # Cursor can be at very top or bottom of viewport
 
 # Smoother mouse scrolling terminal
@@ -44,13 +44,14 @@ set number           # Display (absolute) line numbers.
 set showcmd          # Display incomplete normal mode commands in command bar
 set wildmenu         # Display completion matches in status line
 set wildoptions=pum
+set completeopt=menu
 set shortmess+=I
 set shortmess+=F     # Do not display file info when opening file
 set shortmess-=S     # Show search results as e.g. [2/7] in the command line
 set display=truncate # Show @@@ in the last line if it is truncated
 set signcolumn=number
 set listchars=eol:¬,tab:——>,space:·,trail:·,extends:>,precedes:<
-set fillchars=vert:│ # FIXME: Set other fillchars
+set fillchars=vert:│,lastline:\ ,eob:\ 
 
 autocmd BufEnter * setlocal cursorline
 autocmd BufLeave * setlocal nocursorline
@@ -130,6 +131,8 @@ set cinoptions=:0
 #------------------------#
 
 nnoremap Y yg_
+nnoremap <Leader>n :n<CR>
+nnoremap <Leader>N :N<CR>
 
 def Args()
     var args = map(argv(), (key, val) => key + 1 .. ". " .. val)
@@ -152,24 +155,16 @@ def SynGroup()
 enddef
 command! SynGroup call SynGroup()
 
-command! -nargs=1 -complete=arglist Argument argedit <args> | argdedupe
-command! -nargs=1 -complete=file Argedit argedit <args> | argdedupe
-
 
 #---------#
 # Plugins #
 #---------#
 
 # Disable unused builtin plugins
-g:loaded_2html_plugin = 1
 g:loaded_getscriptPlugin = 1
-g:loaded_gzip = 1
 g:loaded_logipat = 1
-g:loaded_rrhelper = 1
 g:loaded_spellfile_plugin = 1
-g:loaded_tarPlugin = 1
 g:loaded_vimballPlugin = 1
-g:loaded_zipPlugin = 1
 
 # Netrw
 nnoremap - :Explore<CR>
@@ -177,18 +172,17 @@ g:netrw_banner = 0
 
 packadd traces.vim
 packadd vim-commentary
+packadd sudo.vim
 
 packadd vim-rsi
 inoremap <C-k> <C-o>D
-cnoremap <C-k> <C-\>e getcmdpos() == 1 ? "" : getcmdline()[:getcmdpos()-2]<CR>
-# FIXME: rsi <C-f> gives error in LSP rename command line
-# FIXME: Same for my <C-k>
+cnoremap <C-k> <C-\>e getcmdpos() == 1 ? "" : getcmdline()[ : getcmdpos() - 2]<CR>
 
 packadd ultisnips
 g:UltiSnipsSnippetDirectories = ["snips"]
 
 packadd undotree
-g:undotree_WindowLayout   = 2
+g:undotree_WindowLayout    = 2
 g:undotree_TreeNodeShape   = "·"
 g:undotree_TreeReturnShape = "╲"
 g:undotree_TreeVertShape   = "│"
@@ -200,10 +194,13 @@ packadd vimtex
 
 g:vimtex_view_method = "skim"
 g:vimtex_imaps_enabled = 0
+g:vimtex_mappings_enabled = 0
 g:vimtex_syntax_conceal_disable = 1
+g:vimtex_quickfix_method = "pplatex"
+g:vimtex_complete_auto = 0
 g:vimtex_compiler_latexmk = {
     aux_dir: "latexmk_aux",
-    out_dir: "",
+    out_dir: "latexmk_out",
     callback: 1,
     continuous: 1,
     executable: "latexmk",
@@ -222,11 +219,13 @@ runtime macros/sandwich/keymap/surround.vim
 packadd lsp
 
 g:LspOptionsSet({
-    diagSignErrorText: "E",
-    diagSignHintText: "H",
-    diagSignInfoText: "I",
-    diagSignWarningText: "W"
+    diagSignErrorText: "􀒉",
+    diagSignHintText: "􀛭",
+    diagSignInfoText: "􀅴",
+    diagSignWarningText: "􀇾",
+    autoComplete: false
 })
+
 g:LspAddServer([
     { 
         name: "clangd",
@@ -236,8 +235,13 @@ g:LspAddServer([
     { 
         name: "texlab",
         filetype: ["plaintex", "tex"],
-        path: "/opt/homebrew/bin/texlab" 
+        path: "/opt/homebrew/bin/texlab",
     },
+    {
+        name: "pylsp",
+        filetype: "python",
+        path: "/opt/homebrew/bin/pylsp"
+    }
     # vimls does not yet support Vim9
     # {
     #     name: "vimls",
@@ -249,3 +253,8 @@ g:LspAddServer([
     #     }
     # }
 ])
+
+nnoremap <Leader>r :LspRename<CR>
+nnoremap <Leader>d :LspGotoDefinition<CR>
+nnoremap <Leader>s :LspDiagShow<CR>
+nnoremap <Leader>f :LspShowReferences<CR>
