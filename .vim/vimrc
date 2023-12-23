@@ -3,11 +3,8 @@ vim9script
 unlet! g:skip_defaults_vim
 runtime defaults.vim
 
-
-#---------#
-# Spacing #
-#---------#
-
+# Spacing
+# -------
 set autoindent     # Copy indentation of current line when starting new line
 set breakindent    # Wrapped lines follow visual indentation of previous lines
 set tabstop=4      # 1 tab = 4 spaces
@@ -16,14 +13,12 @@ set shiftwidth=0   # One level of indentation is &tabstop spaces
 set softtabstop=-1 # A tab counts as &shiftwidth spaces for editing operations
 
 
-#----------------------#
-# Scrolling & Wrapping #
-#----------------------#
-
+# Scrolling & Wrapping
+# --------------------
 syntax enable    # Enable syntax highlighting
 set wrap         # Lines wider than screen soft wrap around to next line
+set smoothscroll
 set linebreak    # Do not soft wrap in the middle of a word
-# set smoothscroll # Display partial lines at the top of the of viewport
 set scrolloff=0  # Cursor can be at very top or bottom of viewport
 
 # Smoother mouse scrolling terminal
@@ -36,10 +31,8 @@ tnoremap <ScrollWheelUp> <C-\><C-n><ScrollWheelUp>
 tnoremap <ScrollWheelDown> <C-\><C-n><ScrollWheelDown>
 
 
-#-----------#
-# Interface #
-#-----------#
-
+# Interface
+# ---------
 set number           # Display (absolute) line numbers.
 set showcmd          # Display incomplete normal mode commands in command bar
 set wildmenu         # Display completion matches in status line
@@ -62,17 +55,13 @@ autocmd OSAppearanceChanged * {
     redraw
 }
 
-def g:TitleModified(): string
-    return &modified ?  "— Edited" : ""
-enddef
-set titlestring=%t\ %{g:TitleModified()}
 set laststatus=1
 set ruler
 
 if has("gui_running")
     set rulerformat=%14(%=%m\ %5l,\ %3c%)
     set statusline=%f\ %m\ %=%5l,\ %3c\ %y
-    set guifont=SF\ Mono:h11
+    set guifont=-monospace-
     set linespace=2 # Vertical spacing between lines
 else
     set rulerformat=%21(%=%m\ %5l,\ %3c\ \ \ \ %P%)
@@ -98,10 +87,8 @@ if &term =~ "xterm.*"
 endif
 
 
-#------------#
-# Behaviours #
-#------------#
-
+# Behaviours
+# ----------
 set hlsearch         # Highlight all matches of search pattern
 set incsearch        # Highlight search matches while typing pattern
 set splitbelow       # Prefer to create new splits below
@@ -116,20 +103,17 @@ set history=1000     # Remember the last 1000 commands
 set spelllang=en_gb  # Spell check follows British English
 set mouse=a
 set whichwrap+=<,>,[,]
+set formatoptions-=ro
 
 
-#----------#
-# Filetype #
-#----------#
-
+# Filetype
+# --------
 filetype plugin indent on
 set cinoptions=:0
 
 
-#------------------------#
-# Commands & Keybindings #
-#------------------------#
-
+# Commands & Keybindings
+# ----------------------
 nnoremap Y yg_
 nnoremap <Leader>n :n<CR>
 nnoremap <Leader>N :N<CR>
@@ -156,10 +140,8 @@ enddef
 command! SynGroup call SynGroup()
 
 
-#---------#
-# Plugins #
-#---------#
-
+# Plugins
+# -------
 # Disable unused builtin plugins
 g:loaded_getscriptPlugin = 1
 g:loaded_logipat = 1
@@ -199,8 +181,8 @@ g:vimtex_syntax_conceal_disable = 1
 g:vimtex_quickfix_method = "pplatex"
 g:vimtex_complete_auto = 0
 g:vimtex_compiler_latexmk = {
-    aux_dir: "latexmk_aux",
-    out_dir: "latexmk_out",
+    aux_dir: "latexmk",
+    out_dir: "latexmk",
     callback: 1,
     continuous: 1,
     executable: "latexmk",
@@ -218,6 +200,7 @@ runtime macros/sandwich/keymap/surround.vim
 
 packadd lsp
 
+if has("gui_running")
 g:LspOptionsSet({
     diagSignErrorText: "􀒉",
     diagSignHintText: "􀛭",
@@ -225,23 +208,31 @@ g:LspOptionsSet({
     diagSignWarningText: "􀇾",
     autoComplete: false
 })
+endif
+
+g:LspOptionsSet({autoComplete: false})
 
 g:LspAddServer([
-    { 
-        name: "clangd",
-        filetype: ["c", "cpp", "objc"],
-        path: "/usr/bin/clangd"
-    },
+    # { 
+    #     name: "clangd",
+    #     filetype: ["c", "cpp", "objc"],
+    #     path: "/usr/bin/clangd"
+    # },
     { 
         name: "texlab",
         filetype: ["plaintex", "tex"],
         path: "/opt/homebrew/bin/texlab",
     },
-    {
-        name: "pylsp",
-        filetype: "python",
-        path: "/opt/homebrew/bin/pylsp"
-    }
+    # {
+    #     name: "pylsp",
+    #     filetype: "python",
+    #     path: "/opt/homebrew/bin/pylsp"
+    # },
+    # {
+    #     name: "rust-analyzer",
+    #     filetype: "rust",
+    #     path: "/opt/homebrew/bin/rust-analyzer"
+    # }
     # vimls does not yet support Vim9
     # {
     #     name: "vimls",

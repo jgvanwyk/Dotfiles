@@ -12,7 +12,6 @@ packages=(
     tpope/vim-rsi
     tpope/vim-eunuch
     yegappan/lsp
-    vim-scripts/sudo.vim
 )
 
 if [[ ! -a $packpath ]]; then
